@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>صفحهٔ شاعرانه حسین سبزواری</title>
+  <style>
+    body { background: #f6f5f3; font-family: Tahoma, sans-serif; text-align: center; padding: 40px; color: #333; }
+    .button { border: none; color: white; padding: 14px 28px; margin: 10px; font-size: 16px; cursor: pointer; border-radius: 30px; transition: transform 0.3s; }
+    .button:hover { transform: scale(1.05); }
+    #blue   { background: #3498db; }
+    #red    { background: #e74c3c; }
+    #green  { background: #2ecc71; }
+    #yellow { background: #f1c40f; color: black; }
+    #poet   { background: white; color: black; border: 1px solid #aaa; }
+    #result { margin-top: 40px; font-size: 20px; line-height: 1.4; min-height: 60px; }
+    #poetImage {
+      margin-top: 20px; display: none; width: 180px; height: 180px;
+      border-radius: 50%; border: 4px solid gold; box-shadow: 0 0 20px gold;
+      transition: opacity 1s ease;
+    }
+  </style>
+</head>
+<body>
+  <h1>🎙️ صفحهٔ شاعرانه حسین سبزواری</h1>
+
+  <button class="button" id="blue"   onclick="play('blue')">آبی</button>
+  <button class="button" id="red"    onclick="play('red')">قرمز</button>
+  <button class="button" id="green"  onclick="play('green')">سبز</button>
+  <button class="button" id="yellow" onclick="showImage()">زرد</button>
+  <button class="button" id="poet"   onclick="showPoet()">شاعر</button>
+
+  <div id="result"></div>
+  <img id="poetImage" src="http://temp.sh/ozEHv/image_1749550638294.jpeg" alt="poet" />
+
+  <audio id="blue-audio"  src="http://temp.sh/gRQDt/blue.mp3.mp3"></audio>
+  <audio id="red-audio"   src="http://temp.sh/oMdFC/red.mp3.mp3"></audio>
+  <audio id="green-audio" src="http://temp.sh/JvrhO/red.mp3.mp3"></audio>
+
+  <script>
+    const poems = {
+      blue:  "دوباره دفتر شعرم نظر به من دارد<br>دهان گشوده قلم صد ورق سخن دارد",
+      red:   "نوشتم اسم تو را هم کنار دلتنگی<br>بماند این غزلم یادگار دلتنگی",
+      green: "نسیم نغز رباعیست می‌وزد در جان<br>قصیده باغ بزرگی دراین بدن دارد"
+    };
+
+    function play(color) {
+      document.getElementById("result").innerHTML = poems[color];
+      ["blue","red","green"].forEach(c => {
+        let a = document.getElementById(c+"-audio");
+        a.pause(); a.currentTime = 0;
+      });
+      document.getElementById(color+"-audio").play();
+      document.getElementById("poetImage").style.display = "none";
+    }
+
+    function showImage() {
+      document.getElementById("result").innerHTML =
+        "سرم پر از کلماتی است تند و پی در پی<br>در انتظار قلم در ترددند از کی";
+      let img = document.getElementById("poetImage");
+      img.style.opacity = 0; img.style.display = "block";
+      setTimeout(()=> img.style.opacity = 1, 100);
+      ["blue","red","green"].forEach(c => document.getElementById(c+"-audio").pause());
+    }
+
+    function showPoet() {
+      document.getElementById("result").innerHTML = "شاعر: حسین سبزواری";
+      document.getElementById("poetImage").style.display = "none";
+    }
+  </script>
+</body>
+</html>
